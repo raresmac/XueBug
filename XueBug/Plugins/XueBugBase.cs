@@ -15,32 +15,42 @@ namespace XueBug.Plugins
     {
         private const string modGUID = "HuaPiaoPiao.XueBug";
         private const string modName = "XueBug";
-        private const string modVersion = "0.0.1";
-        internal static AssetBundle Bundle;
-        internal static AudioClip[] soundFX;
-
-
+        private const string modVersion = "0.0.2";
+        internal static AssetBundle xueHuaBundle, xueHuaOrigBundle;
+        internal static AudioClip[] xueHuaSoundFX, xueHuaOrigSoundFX;
+        internal static AudioClip[] new_chitterSFX, new_angryScreechSFX; //HoarderBugAIPatch
         private readonly Harmony harmony = new Harmony(modGUID);
 
         void Awake()
         {
             harmony.PatchAll(typeof(XueBugBase));
             harmony.PatchAll(typeof(HoarderBugAIPatch));
+            string thisLocation = this.Info.Location;
+            thisLocation = thisLocation.TrimEnd("XueBug.dll".ToCharArray());
 
-            soundFX = new AudioClip[1];
-            string folderLocation = this.Info.Location;
-            folderLocation = folderLocation.TrimEnd("XueBug.dll".ToCharArray());
-            Bundle = AssetBundle.LoadFromFile(folderLocation + "xue");
-            
-            if(Bundle == null)
+            // XueHuaPiaoPiao
+            xueHuaSoundFX = new AudioClip[1];
+            xueHuaOrigSoundFX = new AudioClip[1];
+            xueHuaBundle = AssetBundle.LoadFromFile(thisLocation + "xue");
+            xueHuaOrigBundle = AssetBundle.LoadFromFile(thisLocation + "xueorig");
+
+            if (xueHuaBundle == null || xueHuaOrigBundle == null)
             {
-                this.Logger.LogError("Failed to load asset bundle!");
+                this.Logger.LogError("Failed to load xueHua asset bundle!");
                 return;
             }
             else
             {
-                soundFX = Bundle.LoadAllAssets<AudioClip>();
+                xueHuaSoundFX = xueHuaBundle.LoadAllAssets<AudioClip>();
+                xueHuaOrigSoundFX = xueHuaOrigBundle.LoadAllAssets<AudioClip>();
+
+                new_chitterSFX = new AudioClip[xueHuaSoundFX.Length];
+                new_chitterSFX[0] = xueHuaSoundFX[0];
+
+                new_angryScreechSFX = new AudioClip[xueHuaOrigSoundFX.Length];
+                new_angryScreechSFX[0] = xueHuaOrigSoundFX[0];
             }
+
             this.Logger.LogInfo("Plugin " + modName + " (version " + modVersion + ") has been succesfully loaded!");
         }
 
