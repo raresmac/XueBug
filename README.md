@@ -6,3 +6,6 @@ v0.0.1 (Initial patch):
 
 v0.0.2:
 - Added angryScreechSFX to HoarderBugAI
+
+v0.0.3:
+- Added musicAudios0 to BoomboxItem
