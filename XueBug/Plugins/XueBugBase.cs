@@ -15,7 +15,7 @@ namespace XueBug.Plugins
     {
         private const string modGUID = "HuaPiaoPiao.XueBug";
         private const string modName = "XueBug";
-        private const string modVersion = "0.0.3";
+        private const string modVersion = "0.0.4";
 
         //HoarderBugAIPatch
         internal static AssetBundle xueHuaBundle, xueHuaOrigBundle;
@@ -23,8 +23,8 @@ namespace XueBug.Plugins
         internal static AudioClip[] new_chitterSFX, new_angryScreechSFX;
 
         //BoomboxItemPatch
-        internal static AssetBundle otelulGalatiBundle;
-        internal static AudioClip[] otelulGalatiSoundFX;
+        internal static AssetBundle otelulGalatiBundle, rapBattleBundle;
+        internal static AudioClip[] otelulGalatiSoundFX, rapBattleSoundFX;
         internal static AudioClip[] new_musicAudios;
 
 
@@ -38,15 +38,13 @@ namespace XueBug.Plugins
             string thisLocation = this.Info.Location;
             thisLocation = thisLocation.TrimEnd("XueBug.dll".ToCharArray());
 
-            // XueHuaPiaoPiao
-            xueHuaSoundFX = new AudioClip[1];
-            xueHuaOrigSoundFX = new AudioClip[1];
-            xueHuaBundle = AssetBundle.LoadFromFile(thisLocation + "chitterSFX");
-            xueHuaOrigBundle = AssetBundle.LoadFromFile(thisLocation + "angryScreechSFX");
+            // HoarderBugAI
+            xueHuaBundle = AssetBundle.LoadFromFile(thisLocation + "chitterSFX"); // xuehuapiaopiao
+            xueHuaOrigBundle = AssetBundle.LoadFromFile(thisLocation + "angryScreechSFX"); // xuehuapiaopiao original
 
-            // Otelul Galati
-            otelulGalatiSoundFX = new AudioClip[1];
-            otelulGalatiBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios0");
+            // BoomboxItem
+            otelulGalatiBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios0"); // otelul galati
+            rapBattleBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios1"); // rap battle bahoi
 
             if (xueHuaBundle == null || xueHuaOrigBundle == null)
             {
@@ -55,6 +53,9 @@ namespace XueBug.Plugins
             }
             else
             {
+                xueHuaSoundFX = new AudioClip[1];
+                xueHuaOrigSoundFX = new AudioClip[1];
+
                 xueHuaSoundFX = xueHuaBundle.LoadAllAssets<AudioClip>();
                 xueHuaOrigSoundFX = xueHuaOrigBundle.LoadAllAssets<AudioClip>();
 
@@ -65,17 +66,23 @@ namespace XueBug.Plugins
                 new_angryScreechSFX[0] = xueHuaOrigSoundFX[0];
             }
 
-            if (otelulGalatiBundle == null)
+            if (!otelulGalatiBundle || !rapBattleBundle)
             {
                 this.Logger.LogError("Failed to load otelulGalati asset bundle!");
                 return;
             }
             else
             {
-                otelulGalatiSoundFX = otelulGalatiBundle.LoadAllAssets<AudioClip>();
+                otelulGalatiSoundFX = new AudioClip[1];
+                rapBattleSoundFX = new AudioClip[1];
 
-                new_musicAudios = new AudioClip[otelulGalatiSoundFX.Length];
+                otelulGalatiSoundFX = otelulGalatiBundle.LoadAllAssets<AudioClip>();
+                rapBattleSoundFX = rapBattleBundle.LoadAllAssets<AudioClip>();
+
+                int length_new_musicAudios = 2;
+                new_musicAudios = new AudioClip[length_new_musicAudios];
                 new_musicAudios[0] = otelulGalatiSoundFX[0];
+                new_musicAudios[1] = rapBattleSoundFX[0];
             }
             this.Logger.LogInfo("Plugin " + modName + " (version " + modVersion + ") has been succesfully loaded!");
         }

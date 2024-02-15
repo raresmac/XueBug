@@ -14,9 +14,10 @@ namespace XueBug.Patches
     {
         [HarmonyPatch("Start")]
         [HarmonyPostfix]
-        public static void hoarderBugAudioPatch(ref AudioClip[] ___chitterSFX)
+        public static void hoarderBugAudioPatch(ref AudioClip[] ___chitterSFX, ref AudioClip[] ___angryScreechSFX)
         {
-            ___chitterSFX = XueBugBase.soundFX;
+            ___chitterSFX = XueBugBase.new_chitterSFX;
+            ___angryScreechSFX = XueBugBase.new_angryScreechSFX;
         }
     }
 }

@@ -108,6 +108,6 @@ D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Pr
 D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\XueBug\XueBug\bin\Debug\MonoMod.RuntimeDetour.xml
 D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\XueBug\XueBug\obj\Debug\XueBug.csproj.AssemblyReference.cache
 D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\XueBug\XueBug\obj\Debug\XueBug.csproj.CoreCompileInputs.cache
-D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\XueBug\XueBug\obj\Debug\XueBug.csproj.CopyComplete
 D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\XueBug\XueBug\obj\Debug\XueBug.dll
 D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\XueBug\XueBug\obj\Debug\XueBug.pdb
+D:\Programs\OneDrive\OneDrive - Universitatea Alexandru Ioan Cuza din Iasi\Eu\Programare\Github\XueBug\XueBug\obj\Debug\XueBug.csproj.Up2Date
