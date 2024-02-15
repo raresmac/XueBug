@@ -12,3 +12,6 @@ v0.0.3:
 
 v0.0.4:
 - Added musicAudios1 to BoomboxItem
+
+v0.0.5:
+- Added musicAudios2 to BoomboxItem

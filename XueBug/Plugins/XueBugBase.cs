@@ -15,7 +15,7 @@ namespace XueBug.Plugins
     {
         private const string modGUID = "HuaPiaoPiao.XueBug";
         private const string modName = "XueBug";
-        private const string modVersion = "0.0.4";
+        private const string modVersion = "0.0.5";
 
         //HoarderBugAIPatch
         internal static AssetBundle xueHuaBundle, xueHuaOrigBundle;
@@ -23,8 +23,8 @@ namespace XueBug.Plugins
         internal static AudioClip[] new_chitterSFX, new_angryScreechSFX;
 
         //BoomboxItemPatch
-        internal static AssetBundle otelulGalatiBundle, rapBattleBundle;
-        internal static AudioClip[] otelulGalatiSoundFX, rapBattleSoundFX;
+        internal static AssetBundle otelulGalatiBundle, rapBattleBundle, mansNotHotBundle;
+        internal static AudioClip[] otelulGalatiSoundFX, rapBattleSoundFX, mansNotHotSoundFX;
         internal static AudioClip[] new_musicAudios;
 
 
@@ -45,8 +45,9 @@ namespace XueBug.Plugins
             // BoomboxItem
             otelulGalatiBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios0"); // otelul galati
             rapBattleBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios1"); // rap battle bahoi
+            mansNotHotBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios2"); // mans not hot
 
-            if (xueHuaBundle == null || xueHuaOrigBundle == null)
+            if (!xueHuaBundle || !xueHuaOrigBundle)
             {
                 this.Logger.LogError("Failed to load xueHua asset bundle!");
                 return;
@@ -66,7 +67,7 @@ namespace XueBug.Plugins
                 new_angryScreechSFX[0] = xueHuaOrigSoundFX[0];
             }
 
-            if (!otelulGalatiBundle || !rapBattleBundle)
+            if (!otelulGalatiBundle || !rapBattleBundle || !mansNotHotBundle)
             {
                 this.Logger.LogError("Failed to load otelulGalati asset bundle!");
                 return;
@@ -75,14 +76,17 @@ namespace XueBug.Plugins
             {
                 otelulGalatiSoundFX = new AudioClip[1];
                 rapBattleSoundFX = new AudioClip[1];
+                mansNotHotSoundFX = new AudioClip[1];
 
                 otelulGalatiSoundFX = otelulGalatiBundle.LoadAllAssets<AudioClip>();
                 rapBattleSoundFX = rapBattleBundle.LoadAllAssets<AudioClip>();
+                mansNotHotSoundFX = mansNotHotBundle.LoadAllAssets<AudioClip>();
 
-                int length_new_musicAudios = 2;
+                int length_new_musicAudios = 3;
                 new_musicAudios = new AudioClip[length_new_musicAudios];
                 new_musicAudios[0] = otelulGalatiSoundFX[0];
                 new_musicAudios[1] = rapBattleSoundFX[0];
+                new_musicAudios[2] = mansNotHotSoundFX[0];
             }
             this.Logger.LogInfo("Plugin " + modName + " (version " + modVersion + ") has been succesfully loaded!");
         }
