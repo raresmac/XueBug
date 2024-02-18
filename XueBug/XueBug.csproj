@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Patches\BoomboxItemPatch.cs" />
     <Compile Include="Patches\HoarderBugAIPatch.cs" />
+    <Compile Include="Patches\PufferAIPatch.cs" />
     <Compile Include="Plugins\XueBugBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
