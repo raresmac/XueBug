@@ -3,15 +3,19 @@ This mod replaces several sounds with memes (some of them romanian, some interna
 
 ## Instructions
  
-Copy the BepInEx folder from the archive (in releases) over the BepInEx folder in your Lethal Company installation files.
+Copy the mod folder from the archive in the BepInEx/plugins folder in your Lethal Company installation files (or in your Appdata/Roaming/Thunderstore and your profile). Or install using the Thunderstore app using this link: https://thunderstore.io/c/lethal-company/p/raresmac/XueBug/
 
 ## Changelog
 
 ### v0.1.0 - ? = PufferAI
 
+v0.1.1:
+- Re-uploaded to Thunderstore because I kinda messed up the first time
+
 v0.1.0:
 - Added frightenSFX to PufferAI
 - Added puff to PufferAI
+- First upload to Thunderstore!!
 
 ### v0.0.3 - v0.0.7 = BoomboxItem
 

@@ -15,7 +15,7 @@ namespace XueBug.Plugins
     {
         private const string modGUID = "HuaPiaoPiao.XueBug";
         private const string modName = "XueBug";
-        private const string modVersion = "0.1.0";
+        private const string modVersion = "0.1.1";
 
         // HoarderBugAIPatch
         internal static AssetBundle xueHuaBundle, xueHuaOrigBundle;
