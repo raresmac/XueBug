@@ -9,6 +9,9 @@ Copy the mod folder from the archive in the BepInEx/plugins folder in your Letha
 
 ### v0.1.0 - ? = PufferAI
 
+v0.1.2:
+- Testing
+
 v0.1.1:
 - Re-uploaded to Thunderstore because I kinda messed up the first time
 
