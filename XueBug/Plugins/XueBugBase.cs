@@ -15,7 +15,7 @@ namespace XueBug.Plugins
     {
         private const string modGUID = "HuaPiaoPiao.XueBug";
         private const string modName = "XueBug";
-        private const string modVersion = "0.1.2";
+        private const string modVersion = "0.1.3";
 
         // HoarderBugAIPatch
         internal static AssetBundle xueHuaBundle, xueHuaOrigBundle;
@@ -58,6 +58,18 @@ namespace XueBug.Plugins
             // PufferAI
             beatboxBundle = AssetBundle.LoadFromFile(thisLocation + "PufferAI\\frightenSFX"); // beatbox
             beatboxTusindBundle = AssetBundle.LoadFromFile(thisLocation + "PufferAI\\puff");  // beatbox tusind
+
+            // Thunderstore Mod Manager workaround
+            if (!xueHuaBundle) { xueHuaBundle = AssetBundle.LoadFromFile(thisLocation + "chitterSFX"); }  
+            if (!xueHuaOrigBundle) { xueHuaOrigBundle = AssetBundle.LoadFromFile(thisLocation + "angryScreechSFX"); }
+            if (!otelulGalatiBundle) { otelulGalatiBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios0"); }
+            if (!rapBattleBundle) { rapBattleBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios1"); }
+            if (!mansNotHotBundle) { mansNotHotBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios2"); }
+            if (!triPoloskiBundle) { triPoloskiBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios3"); }
+            if (!allStarBundle) { allStarBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios4"); }
+            if (!beatboxBundle) { beatboxBundle = AssetBundle.LoadFromFile(thisLocation + "frightenSFX"); }
+            if (!beatboxTusindBundle) { beatboxTusindBundle = AssetBundle.LoadFromFile(thisLocation + "puff"); }
+
 
             if (!xueHuaBundle || !xueHuaOrigBundle)
             {
