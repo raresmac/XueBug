@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XueBug.Patches;
+using System.IO;
 
 namespace XueBug.Plugins
 {
@@ -15,7 +16,7 @@ namespace XueBug.Plugins
     {
         private const string modGUID = "HuaPiaoPiao.XueBug";
         private const string modName = "XueBug";
-        private const string modVersion = "0.1.3";
+        private const string modVersion = "0.1.4";
 
         // HoarderBugAIPatch
         internal static AssetBundle xueHuaBundle, xueHuaOrigBundle;
@@ -23,8 +24,8 @@ namespace XueBug.Plugins
         internal static AudioClip[] new_chitterSFX, new_angryScreechSFX;
 
         // BoomboxItemPatch
-        internal static AssetBundle otelulGalatiBundle, rapBattleBundle, mansNotHotBundle, triPoloskiBundle, allStarBundle;
-        internal static AudioClip[] otelulGalatiSoundFX, rapBattleSoundFX, mansNotHotSoundFX, triPoloskiSoundFX, allStarSoundFX;
+        internal static AssetBundle otelulGalatiBundle, rapBattleBundle, mansNotHotBundle, triPoloskiBundle, allStarBundle, broMomentoBundle;
+        internal static AudioClip[] otelulGalatiSoundFX, rapBattleSoundFX, mansNotHotSoundFX, triPoloskiSoundFX, allStarSoundFX, broMomentoSoundFX;
         internal static AudioClip[] new_musicAudios;
 
         // PufferAIPatch
@@ -44,46 +45,114 @@ namespace XueBug.Plugins
             string thisLocation = this.Info.Location;
             thisLocation = thisLocation.TrimEnd("XueBug.dll".ToCharArray());
 
+            // ASCII Art
+            this.Logger.LogInfo("...............................         .. .....-===---------.........         ..");
+            this.Logger.LogInfo("...............................         .....-============---=-......          ..");
+            this.Logger.LogInfo("...............................         ...-+++++===============-.....         ..");
+            this.Logger.LogInfo("................................. .. ....:=+++++++++++++==========:...         ..");
+            this.Logger.LogInfo("................................... ....-++++++++++++++++++========-..         ..");
+            this.Logger.LogInfo(".......................................-++++++++++++++++++++========-...       ..");
+            this.Logger.LogInfo("......................................-===+++++++++++++++++==========:.....    ..");
+            this.Logger.LogInfo(".....................................-============+==================-.....    ..");
+            this.Logger.LogInfo("....................................-=================================:......  ..");
+            this.Logger.LogInfo("...................................:==================================-....... ..");
+            this.Logger.LogInfo("...................................====================================..... . ..");
+            this.Logger.LogInfo(".................................::====================================:.... . ..");
+            this.Logger.LogInfo("............::..................-=-= *####*+============================:.... ...");
+            this.Logger.LogInfo("................................:=+*###****++==========================-....   ..");
+            this.Logger.LogInfo("........:.......................-======++++++======+++***####*+========-...... ..");
+            this.Logger.LogInfo("..............:::..............:=====++++++=++=====+++=++++**#*+===---=-.:--.....");
+            this.Logger.LogInfo(".......................:.......:-=== +#%%%##*+++===+++++++=========-----====-....");
+            this.Logger.LogInfo("...............................:-=====+++++++++===+++*##***+==--==-----====:.....");
+            this.Logger.LogInfo("...............................-=======++++++======+++++*#####*==------=++=:.....");
+            this.Logger.LogInfo("...............................-=====================+++++======-------=++=......");
+            this.Logger.LogInfo("..::::.........................:=================================------=+=:... ..");
+            this.Logger.LogInfo("...............................:-=======++========================-----=-:.... ..");
+            this.Logger.LogInfo("...............................:-======+===========+++============------:........");
+            this.Logger.LogInfo("....................::.........:-====+++==+=========+++================--::......");
+            this.Logger.LogInfo("................................-====+++++**++++**==++++==============--=-:-:....");
+            this.Logger.LogInfo("................................-===++++++++******++++++==============---=--:::..");
+            this.Logger.LogInfo("................................:===+++++++++*++++++++++===============------::::");
+            this.Logger.LogInfo(".................................-==++=++++++++++++++++++===============----:::::");
+            this.Logger.LogInfo("..................................-=+++*###**++**++++++++++=======++===----------");
+            this.Logger.LogInfo("..................................-===++**#####%##%##*++++++++=+++++===--------::");
+            this.Logger.LogInfo(".................................:++===+++***********+++++++++++**+========--::::");
+            this.Logger.LogInfo(".................................=**+===+++****+++++++++++++++*#++========-------");
+            this.Logger.LogInfo("................................:+*#*==+++******++++++++++++***++==========------");
+            this.Logger.LogInfo("..............................::=+**#%*=+++*****++++++++++***++++=++======-------");
+            this.Logger.LogInfo("..............................=+++*###@*++++****+++++++***+++++++=========-------");
+            this.Logger.LogInfo("...............................--= *#+=*@%*+++++++++++**++++++++++=========------");
+            this.Logger.LogInfo("...............................--=+*===+====++++*****+++++++++++=========--------");
+            this.Logger.LogInfo("..............................:-== +#======++++*****++++++++++++==========-------");
+            this.Logger.LogInfo(".............................:--==+*+===++++++*+++===++++++==============--------");
+            this.Logger.LogInfo(".............................:-===+*======+++++===========================-------");
+            this.Logger.LogInfo("............................:--===+=====++================================-------");
+            this.Logger.LogInfo("............................---===**+=====================================-------");
+            this.Logger.LogInfo("..........................:----==+++-=====================================-------");
+            this.Logger.LogInfo("::::::::::::::...........:======++*++=++======================================== ");
+
             // HoarderBugAI
-            xueHuaBundle = AssetBundle.LoadFromFile(thisLocation + "HoarderBugAI\\chitterSFX");          // xuehuapiaopiao
-            xueHuaOrigBundle = AssetBundle.LoadFromFile(thisLocation + "HoarderBugAI\\angryScreechSFX"); // xuehuapiaopiao original
+            if (Directory.Exists(thisLocation + "HoarderBugAI"))
+            {
+                // Manual mode
+                xueHuaBundle = AssetBundle.LoadFromFile(thisLocation + "HoarderBugAI\\chitterSFX");          // xuehuapiaopiao
+                xueHuaOrigBundle = AssetBundle.LoadFromFile(thisLocation + "HoarderBugAI\\angryScreechSFX"); // xuehuapiaopiao original
+            }
+            else
+            {
+                // Thunderstore Mod Manager workaround
+                xueHuaBundle = AssetBundle.LoadFromFile(thisLocation + "chitterSFX");
+                xueHuaOrigBundle = AssetBundle.LoadFromFile(thisLocation + "angryScreechSFX");
+            }
 
             // BoomboxItem
-            otelulGalatiBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios0"); // otelul galati
-            rapBattleBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios1");    // rap battle bahoi
-            mansNotHotBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios2");   // mans not hot
-            triPoloskiBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios3");   // tri poloski
-            allStarBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios4");      // smash mouth - all star
-
+            if (Directory.Exists(thisLocation + "BoomboxItem"))
+            {
+                // Manual mode
+                otelulGalatiBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios0"); // otelul galati
+                rapBattleBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios1");    // rap battle bahoi
+                mansNotHotBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios2");   // mans not hot
+                triPoloskiBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios3");   // tri poloski
+                allStarBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios4");      // smash mouth - all star
+                broMomentoBundle = AssetBundle.LoadFromFile(thisLocation + "BoomboxItem\\musicAudios5");   // bro momento
+            }
+            else
+            {
+                // Thunderstore Mod Manager workaround
+                otelulGalatiBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios0");
+                rapBattleBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios1");
+                mansNotHotBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios2");
+                triPoloskiBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios3");
+                allStarBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios4");
+                broMomentoBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios5");
+            }
+                
             // PufferAI
-            beatboxBundle = AssetBundle.LoadFromFile(thisLocation + "PufferAI\\frightenSFX"); // beatbox
-            beatboxTusindBundle = AssetBundle.LoadFromFile(thisLocation + "PufferAI\\puff");  // beatbox tusind
-
-            // Thunderstore Mod Manager workaround
-            if (!xueHuaBundle) { xueHuaBundle = AssetBundle.LoadFromFile(thisLocation + "chitterSFX"); }  
-            if (!xueHuaOrigBundle) { xueHuaOrigBundle = AssetBundle.LoadFromFile(thisLocation + "angryScreechSFX"); }
-            if (!otelulGalatiBundle) { otelulGalatiBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios0"); }
-            if (!rapBattleBundle) { rapBattleBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios1"); }
-            if (!mansNotHotBundle) { mansNotHotBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios2"); }
-            if (!triPoloskiBundle) { triPoloskiBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios3"); }
-            if (!allStarBundle) { allStarBundle = AssetBundle.LoadFromFile(thisLocation + "musicAudios4"); }
-            if (!beatboxBundle) { beatboxBundle = AssetBundle.LoadFromFile(thisLocation + "frightenSFX"); }
-            if (!beatboxTusindBundle) { beatboxTusindBundle = AssetBundle.LoadFromFile(thisLocation + "puff"); }
-
+            if (Directory.Exists(thisLocation + "PufferAI"))
+            {
+                // Manual mode
+                beatboxBundle = AssetBundle.LoadFromFile(thisLocation + "PufferAI\\frightenSFX"); // beatbox
+                beatboxTusindBundle = AssetBundle.LoadFromFile(thisLocation + "PufferAI\\puff");  // beatbox tusind
+            }
+            else
+            {
+                // Thunderstore Mod Manager workaround
+                beatboxBundle = AssetBundle.LoadFromFile(thisLocation + "frightenSFX");
+                beatboxTusindBundle = AssetBundle.LoadFromFile(thisLocation + "puff");
+            }
 
             if (!xueHuaBundle || !xueHuaOrigBundle)
             {
                 this.Logger.LogError("## Failed to load HoarderBugAI assets!");
 
-                if(!xueHuaBundle)
+                if (!xueHuaBundle)
                 {
                     this.Logger.LogError("Failed to load chitterSFX asset bundle!");
                 }
-                if(!xueHuaOrigBundle)
+                if (!xueHuaOrigBundle)
                 {
                     this.Logger.LogError("Failed to load angryScreechSFX asset bundle!");
                 }
-                return;
             }
             else
             {
@@ -98,9 +167,11 @@ namespace XueBug.Plugins
 
                 new_angryScreechSFX = new AudioClip[xueHuaOrigSoundFX.Length];
                 new_angryScreechSFX[0] = xueHuaOrigSoundFX[0];
+
+                this.Logger.LogInfo("HoarderBugAI sounds were loaded succesfully!");
             }
 
-            if (!otelulGalatiBundle || !rapBattleBundle || !mansNotHotBundle || !triPoloskiBundle || !allStarBundle)
+            if (!otelulGalatiBundle || !rapBattleBundle || !mansNotHotBundle || !triPoloskiBundle || !allStarBundle || !broMomentoBundle)
             {
                 this.Logger.LogError("## Failed to load BoomboxItem assets!");
 
@@ -124,7 +195,10 @@ namespace XueBug.Plugins
                 {
                     this.Logger.LogError("Failed to load musicAudios4 asset bundle!");
                 }
-                return;
+                if (!broMomentoBundle)
+                {
+                    this.Logger.LogError("Failed to load musicAudios5 asset bundle!");
+                }
             }
             else
             {
@@ -133,20 +207,25 @@ namespace XueBug.Plugins
                 mansNotHotSoundFX = new AudioClip[1];
                 triPoloskiSoundFX = new AudioClip[1];
                 allStarSoundFX = new AudioClip[1];
+                broMomentoSoundFX = new AudioClip[1];
 
                 otelulGalatiSoundFX = otelulGalatiBundle.LoadAllAssets<AudioClip>();
                 rapBattleSoundFX = rapBattleBundle.LoadAllAssets<AudioClip>();
                 mansNotHotSoundFX = mansNotHotBundle.LoadAllAssets<AudioClip>();
                 triPoloskiSoundFX = triPoloskiBundle.LoadAllAssets<AudioClip>();
                 allStarSoundFX = allStarBundle.LoadAllAssets<AudioClip>();
+                broMomentoSoundFX = broMomentoBundle.LoadAllAssets<AudioClip>();
 
-                int length_new_musicAudios = 5;
+                int length_new_musicAudios = 6;
                 new_musicAudios = new AudioClip[length_new_musicAudios];
                 new_musicAudios[0] = otelulGalatiSoundFX[0];
                 new_musicAudios[1] = rapBattleSoundFX[0];
                 new_musicAudios[2] = mansNotHotSoundFX[0];
                 new_musicAudios[3] = triPoloskiSoundFX[0];
                 new_musicAudios[4] = allStarSoundFX[0];
+                new_musicAudios[5] = broMomentoSoundFX[0];
+
+                this.Logger.LogInfo("BoomboxItem sounds were loaded succesfully!");
             }
 
             if (!beatboxBundle || !beatboxTusindBundle)
@@ -161,7 +240,6 @@ namespace XueBug.Plugins
                 {
                     this.Logger.LogError("Failed to load nervousMumbling asset bundle!");
                 }
-                return;
             }
             else
             {
@@ -179,6 +257,8 @@ namespace XueBug.Plugins
                 }
 
                 new_puff = beatboxTusindSoundFX[0];
+
+                this.Logger.LogInfo("PufferAI sounds were loaded succesfully!");
             }
 
             this.Logger.LogInfo("Plugin " + modName + " (version " + modVersion + ") has been succesfully loaded!");
