@@ -1,0 +1,9 @@
+{
+  "name": "XueBug",
+  "version_number": "0.1.5",
+  "website_url": "https://github.com/raresmac/XueBug",
+  "description": "This mod replaces several sounds with memes (some of them romanian, some international).",
+  "dependencies": [
+    "BepInEx-BepInExPack-5.4.2100"
+  ]
+}
