@@ -7,6 +7,11 @@ Copy the plugins folder from the archive in the BepInEx folder in your Lethal Co
 
 ## Changelog
 
+### v0.2.0 = Configuration file
+
+v0.2.0:
+- Added configuration file with configurations for everything the mod adds. You have to run the game once for the configuration file to be generated.
+
 ### v0.1.5 = SpringManAI
 
 v0.1.5:

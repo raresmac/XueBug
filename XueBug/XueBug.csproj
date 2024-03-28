@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Config.cs" />
     <Compile Include="Patches\BoomboxItemPatch.cs" />
     <Compile Include="Patches\HoarderBugAIPatch.cs" />
     <Compile Include="Patches\PufferAIPatch.cs" />
